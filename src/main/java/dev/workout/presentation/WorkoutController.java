@@ -1,10 +1,11 @@
 package dev.workout.presentation;
 
-import dev.workout.application.exercise.request.CreateExerciseRequest;
-import dev.workout.application.exercise.usecase.CreateExerciseUseCase;
+import dev.workout.application.workout.request.CreateWorkoutRequest;
+import dev.workout.application.workout.usecase.CreateWorkoutUseCase;
 import dev.workout.exceptions.ServiceException;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -12,26 +13,24 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import jakarta.inject.Inject;
 
 @Path("/api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ExerciseController {
-
-    private final CreateExerciseUseCase createExerciseUseCase;
+public class WorkoutController {
+    private final CreateWorkoutUseCase createWorkoutUseCase;
 
     @Inject
-    public ExerciseController(CreateExerciseUseCase createExerciseUseCase) {
-        this.createExerciseUseCase = createExerciseUseCase;
+    public WorkoutController(CreateWorkoutUseCase createWorkoutUseCase) {
+        this.createWorkoutUseCase = createWorkoutUseCase;
     }
-
+    
     @POST
-    @Path("exercise/create")
+    @Path("workout/create")
     @WithSession
-    public Uni<Response> createExercise(CreateExerciseRequest request) {
+    public Uni<Response> createWorkout(CreateWorkoutRequest request) {
         try {
-            return createExerciseUseCase.execute(request)
+            return createWorkoutUseCase.execute(request)
                     .map(response -> Response.status(Status.CREATED).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {

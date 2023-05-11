@@ -1,12 +1,12 @@
-package dev.workout.application;
+package dev.workout.application.exercise.request;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter@Setter
-public class CreateExerciseResponse {
-    private String hash;
+public class CreateExerciseRequest {
     private String nome;
     private int series;
     private int repeticoes;
+
 }

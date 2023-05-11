@@ -1,7 +1,7 @@
 package dev.workout.presentation;
 
-import dev.workout.application.workout.request.CreateWorkoutRequest;
 import dev.workout.application.workout.usecase.CreateWorkoutUseCase;
+import dev.workout.domain.dto.workout.request.CreateWorkoutRequest;
 import dev.workout.exceptions.ServiceException;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
@@ -24,7 +24,7 @@ public class WorkoutController {
     public WorkoutController(CreateWorkoutUseCase createWorkoutUseCase) {
         this.createWorkoutUseCase = createWorkoutUseCase;
     }
-    
+
     @POST
     @Path("workout/create")
     @WithSession

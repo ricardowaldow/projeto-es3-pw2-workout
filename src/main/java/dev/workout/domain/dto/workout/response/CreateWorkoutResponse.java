@@ -1,4 +1,4 @@
-package dev.workout.application.workout.response;
+package dev.workout.domain.dto.workout.response;
 
 import lombok.Getter;
 import lombok.Setter;

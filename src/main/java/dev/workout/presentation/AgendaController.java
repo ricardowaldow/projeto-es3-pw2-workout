@@ -1,7 +1,7 @@
 package dev.workout.presentation;
 
-import dev.workout.application.exercise.usecase.CreateExerciseUseCase;
-import dev.workout.domain.dto.exercise.request.CreateExerciseRequest;
+import dev.workout.application.agenda.usecase.CreateAgendaUseCase;
+import dev.workout.domain.dto.agenda.request.CreateAgendaRequest;
 import dev.workout.exceptions.ServiceException;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
@@ -12,26 +12,24 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import jakarta.inject.Inject;
 
 @Path("/api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ExerciseController {
+public class AgendaController {
+    private final CreateAgendaUseCase createAgendaUseCase;
 
-    private final CreateExerciseUseCase createExerciseUseCase;
-
-    @Inject
-    public ExerciseController(CreateExerciseUseCase createExerciseUseCase) {
-        this.createExerciseUseCase = createExerciseUseCase;
+    public AgendaController(CreateAgendaUseCase createAgendaUseCase) {
+        this.createAgendaUseCase = createAgendaUseCase;
     }
 
     @POST
-    @Path("exercise/create")
+    @Path("/agenda/create")
     @WithSession
-    public Uni<Response> createExercise(CreateExerciseRequest request) {
+    public Uni<Response> createAgenda(CreateAgendaRequest request) {
+
         try {
-            return createExerciseUseCase.execute(request)
+            return createAgendaUseCase.execute(request)
                     .map(response -> Response.status(Status.CREATED).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
@@ -47,5 +45,4 @@ public class ExerciseController {
                     Response.Status.BAD_REQUEST);
         }
     }
-
 }

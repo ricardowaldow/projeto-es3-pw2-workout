@@ -1,4 +1,4 @@
-package dev.workout.domain.repository;
+package dev.workout.data.repository;
 
 import dev.workout.domain.models.AgendaEntity;
 import io.smallrye.mutiny.Uni;

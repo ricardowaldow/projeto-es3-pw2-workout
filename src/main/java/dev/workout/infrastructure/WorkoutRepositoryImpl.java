@@ -1,7 +1,7 @@
 package dev.workout.infrastructure;
 
+import dev.workout.data.repository.WorkoutRepository;
 import dev.workout.domain.models.WorkoutEntity;
-import dev.workout.domain.repository.WorkoutRepository;
 import io.quarkus.hibernate.reactive.panache.PanacheRepository;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;

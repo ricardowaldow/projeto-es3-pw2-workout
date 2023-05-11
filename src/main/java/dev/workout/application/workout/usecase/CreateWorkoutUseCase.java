@@ -1,9 +1,9 @@
 package dev.workout.application.workout.usecase;
 
-import dev.workout.application.workout.request.CreateWorkoutRequest;
-import dev.workout.application.workout.response.CreateWorkoutResponse;
+import dev.workout.data.repository.WorkoutRepository;
+import dev.workout.domain.dto.workout.request.CreateWorkoutRequest;
+import dev.workout.domain.dto.workout.response.CreateWorkoutResponse;
 import dev.workout.domain.models.WorkoutEntity;
-import dev.workout.domain.repository.WorkoutRepository;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 

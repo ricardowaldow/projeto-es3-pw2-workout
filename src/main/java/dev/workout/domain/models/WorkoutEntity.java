@@ -37,6 +37,9 @@ public class WorkoutEntity extends PanacheEntityBase {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
     private List<AgendaEntity> agendas;
 
+    /** Hash from workout owner. */
+    private String userHash;
+
     /** Workout Constructor */
     public WorkoutEntity() {
         super();

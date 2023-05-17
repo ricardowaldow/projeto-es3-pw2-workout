@@ -15,9 +15,10 @@ public class CreateWorkoutUseCase {
         this.workoutRepository = workoutRepository;
     }
 
-    public Uni<CreateWorkoutResponse> execute(CreateWorkoutRequest request) {
+    public Uni<CreateWorkoutResponse> execute(final CreateWorkoutRequest request, final String userHash) {
         WorkoutEntity workout = new WorkoutEntity();
         workout.setNome(request.getNome());
+        workout.setUserHash(userHash);
 
         return workoutRepository.persist(workout)
         .map(v -> {

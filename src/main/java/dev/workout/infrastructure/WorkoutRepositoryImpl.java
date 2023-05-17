@@ -1,5 +1,7 @@
 package dev.workout.infrastructure;
 
+import java.util.List;
+
 import dev.workout.data.repository.WorkoutRepository;
 import dev.workout.domain.models.WorkoutEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheRepository;
@@ -17,6 +19,11 @@ public class WorkoutRepositoryImpl implements WorkoutRepository, PanacheReposito
     @Override
     public Uni<WorkoutEntity> findByHash(String hash) {
         return find("hash", hash).firstResult();
+    }
+
+    @Override
+    public Uni<List<WorkoutEntity>> listUserWorkouts(String hash) {
+       return find("userHash", hash).list();
     }
     
 }

@@ -1,5 +1,7 @@
 package dev.workout.presentation;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import dev.workout.application.workout.usecase.CreateWorkoutUseCase;
 import dev.workout.domain.dto.workout.request.CreateWorkoutRequest;
 import dev.workout.exceptions.ServiceException;
@@ -19,6 +21,9 @@ import jakarta.ws.rs.core.Response.Status;
 @Produces(MediaType.APPLICATION_JSON)
 public class WorkoutController {
     private final CreateWorkoutUseCase createWorkoutUseCase;
+
+    @Inject
+    JsonWebToken jwt;
 
     @Inject
     public WorkoutController(CreateWorkoutUseCase createWorkoutUseCase) {

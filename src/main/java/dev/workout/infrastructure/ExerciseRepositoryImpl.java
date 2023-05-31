@@ -11,7 +11,7 @@ public class ExerciseRepositoryImpl implements ExerciseRepository, PanacheReposi
 
     @Override
     public Uni<ExerciseEntity> persist(ExerciseEntity exercise) {
-        return persist(exercise);
+        return persistAndFlush(exercise);
     }
 
     @Override

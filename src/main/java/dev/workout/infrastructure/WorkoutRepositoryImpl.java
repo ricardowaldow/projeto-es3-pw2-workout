@@ -13,7 +13,7 @@ public class WorkoutRepositoryImpl implements WorkoutRepository, PanacheReposito
 
     @Override
     public Uni<WorkoutEntity> persist(WorkoutEntity workout) {
-        return persist(workout);
+        return persistAndFlush(workout);
     }
 
     @Override

@@ -7,7 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class DeleteAgendaUseCase {
     private final AgendaRepository agendaRepository;
-    
+
     public DeleteAgendaUseCase(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
     }
@@ -16,7 +16,7 @@ public class DeleteAgendaUseCase {
         return agendaRepository.findByHash(hash)
         .onItem().ifNotNull()
         .transformToUni(agenda -> {
-            if (agenda.getWorkout().getUserHash() != userHash) {
+            if (!userHash.equals(agenda.getWorkout().getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
             return agenda.delete();

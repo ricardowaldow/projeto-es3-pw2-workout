@@ -25,7 +25,7 @@ public class CreateAgendaUseCase {
         return workoutRepository.findByHash(request.getWorkoutHash())
         .onItem().ifNotNull()
         .transformToUni(wk -> {
-            if (wk.getUserHash() != userHash) {
+            if (!userHash.equals(wk.getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
             AgendaEntity agenda = new AgendaEntity();

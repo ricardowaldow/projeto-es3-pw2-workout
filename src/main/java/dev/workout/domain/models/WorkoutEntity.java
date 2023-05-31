@@ -9,10 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,10 +33,11 @@ public class WorkoutEntity extends PanacheEntityBase {
     private String hash;
 
     /** Workout name. */
+    @NotNull
     private String nome;
 
     /** Workout agendas. */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout", fetch = FetchType.EAGER)
     private List<AgendaEntity> agendas;
 
     /** Hash from workout owner. */

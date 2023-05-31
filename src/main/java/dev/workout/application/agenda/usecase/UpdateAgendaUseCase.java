@@ -9,7 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class UpdateAgendaUseCase {
     private final AgendaRepository agendaRepository;
-    
+
     public UpdateAgendaUseCase(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
     }
@@ -18,7 +18,7 @@ public class UpdateAgendaUseCase {
         return agendaRepository.findByHash(request.getHash())
         .onItem().ifNotNull()
         .transformToUni(agenda -> {
-            if (agenda.getWorkout().getUserHash() != userHash) {
+            if (!userHash.equals(agenda.getWorkout().getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
             agenda.setOrdem(request.getOrdem());

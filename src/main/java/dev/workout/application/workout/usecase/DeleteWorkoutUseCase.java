@@ -16,7 +16,7 @@ public class DeleteWorkoutUseCase {
         return workoutRepository.findByHash(hash)
         .onItem().ifNotNull()
         .transformToUni(workout -> {
-            if (workout.getHash() != userHash) {
+            if (!userHash.equals(workout.getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
             return workout.delete();

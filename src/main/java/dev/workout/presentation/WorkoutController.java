@@ -10,6 +10,8 @@ import dev.workout.domain.dto.workout.request.CreateWorkoutRequest;
 import dev.workout.exceptions.ServiceException;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -25,6 +27,8 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/api/workout")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@DeclareRoles("user")
+@RolesAllowed("user")
 public class WorkoutController {
     private final CreateWorkoutUseCase createWorkoutUseCase;
     private final ListUserWorkoutsUseCase listUserWorkoutsUseCase;

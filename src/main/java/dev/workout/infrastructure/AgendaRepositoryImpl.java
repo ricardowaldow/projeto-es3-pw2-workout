@@ -11,7 +11,7 @@ public class AgendaRepositoryImpl implements AgendaRepository, PanacheRepository
 
     @Override
     public Uni<AgendaEntity> persist(AgendaEntity agenda) {
-        return persist(agenda);
+        return persistAndFlush(agenda);
     }
 
     @Override

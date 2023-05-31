@@ -1,5 +1,6 @@
 package dev.workout.domain.models;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,11 +8,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +38,11 @@ public class AgendaEntity extends PanacheEntityBase {
     /** Workout object. */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workout_id")
+    @JsonIgnore
     private WorkoutEntity workout;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agenda", fetch = FetchType.EAGER)
+    private List<ExerciseEntity> exercises;
 
     /** Agenda Constructor. */
     public AgendaEntity() {

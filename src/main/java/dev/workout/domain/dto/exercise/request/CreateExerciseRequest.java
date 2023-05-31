@@ -8,5 +8,6 @@ public class CreateExerciseRequest {
     private String nome;
     private int series;
     private int repeticoes;
+    private String agendaHash;
 
 }

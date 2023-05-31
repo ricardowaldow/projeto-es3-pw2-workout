@@ -19,4 +19,9 @@ public class AgendaRepositoryImpl implements AgendaRepository, PanacheRepository
         return find("hash", hash).firstResult();
     }
 
+    @Override
+    public Uni<Long> deleteAgenda(AgendaEntity agenda) {
+        return delete("hash", agenda.getHash());
+    }
+
 }

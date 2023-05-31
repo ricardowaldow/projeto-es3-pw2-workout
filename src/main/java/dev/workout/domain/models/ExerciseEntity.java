@@ -2,6 +2,9 @@ package dev.workout.domain.models;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
@@ -10,7 +13,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +41,7 @@ public class ExerciseEntity extends PanacheEntityBase {
     private int repeticoes;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "agenda_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private AgendaEntity agenda;
 

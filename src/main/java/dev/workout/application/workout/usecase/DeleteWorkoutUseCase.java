@@ -12,14 +12,14 @@ public class DeleteWorkoutUseCase {
         this.workoutRepository = workoutRepository;
     }
 
-    public Uni<Void> execute(final String hash, final String userHash) {
+    public Uni<Object> execute(final String hash, final String userHash) {
         return workoutRepository.findByHash(hash)
         .onItem().ifNotNull()
         .transformToUni(workout -> {
             if (!userHash.equals(workout.getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
-            return workout.delete();
+            return workoutRepository.deleteWorkout(workout);
         });
     }
 

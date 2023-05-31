@@ -21,9 +21,12 @@ public class CreateExerciseUseCase {
         this.agendaRepository = agendaRepository;
     }
 
-    public Uni<CreateExerciseResponse> execute(CreateExerciseRequest request) {
+    public Uni<CreateExerciseResponse> execute(CreateExerciseRequest request, String userHash) {
         return agendaRepository.findByHash(request.getAgendaHash())
         .onItem().ifNotNull().transformToUni(agenda -> {
+            if (!userHash.equals(agenda.getWorkout().getUserHash())) {
+                throw new IllegalArgumentException("Proibido");
+            }
             ExerciseEntity exercise = new ExerciseEntity();
             exercise.setNome(request.getNome());
             exercise.setRepeticoes(request.getRepeticoes());

@@ -9,4 +9,5 @@ public interface WorkoutRepository {
     Uni<WorkoutEntity> persist(WorkoutEntity workout);
     Uni<WorkoutEntity> findByHash(String hash);
     Uni<List<WorkoutEntity>> listUserWorkouts(String hash);
+    Uni<Long> deleteWorkout(WorkoutEntity workout);
 }

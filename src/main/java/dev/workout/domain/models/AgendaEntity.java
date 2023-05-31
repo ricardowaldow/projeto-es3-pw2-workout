@@ -3,6 +3,11 @@ package dev.workout.domain.models;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
@@ -37,11 +42,14 @@ public class AgendaEntity extends PanacheEntityBase {
 
     /** Workout object. */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "workout_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private WorkoutEntity workout;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agenda", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "agenda_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Fetch(FetchMode.SELECT)
     private List<ExerciseEntity> exercises;
 
     /** Agenda Constructor. */

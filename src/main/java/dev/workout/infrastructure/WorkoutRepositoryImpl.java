@@ -25,5 +25,10 @@ public class WorkoutRepositoryImpl implements WorkoutRepository, PanacheReposito
     public Uni<List<WorkoutEntity>> listUserWorkouts(String hash) {
        return find("userHash", hash).list();
     }
+
+    @Override
+    public Uni<Long> deleteWorkout(WorkoutEntity workout) {
+        return delete("hash", workout.getHash());
+    }
     
 }

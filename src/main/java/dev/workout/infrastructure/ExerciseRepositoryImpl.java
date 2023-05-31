@@ -19,4 +19,9 @@ public class ExerciseRepositoryImpl implements ExerciseRepository, PanacheReposi
         return find("hash", hash).firstResult();
     }
 
+    @Override
+    public Uni<Long> deleteExercise(ExerciseEntity exercise) {
+        return delete("hash", exercise.getHash());
+    }
+
 }

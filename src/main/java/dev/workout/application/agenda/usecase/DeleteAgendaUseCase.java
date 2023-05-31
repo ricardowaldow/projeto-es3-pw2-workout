@@ -12,14 +12,14 @@ public class DeleteAgendaUseCase {
         this.agendaRepository = agendaRepository;
     }
 
-    public Uni<Void> execute(final String hash, final String userHash) {
+    public Uni<Object> execute(final String hash, final String userHash) {
         return agendaRepository.findByHash(hash)
         .onItem().ifNotNull()
         .transformToUni(agenda -> {
             if (!userHash.equals(agenda.getWorkout().getUserHash())) {
                 throw new IllegalArgumentException("Proibido");
             }
-            return agenda.delete();
+            return agendaRepository.deleteAgenda(agenda);
         });
     }
 }

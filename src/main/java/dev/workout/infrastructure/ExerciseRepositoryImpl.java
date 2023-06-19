@@ -16,7 +16,8 @@ public class ExerciseRepositoryImpl implements ExerciseRepository, PanacheReposi
 
     @Override
     public Uni<ExerciseEntity> findByHash(String hash) {
-        return find("hash", hash).firstResult();
+        return find("hash", hash).firstResult()
+        .onItem().ifNull().failWith(new IllegalArgumentException("Exercício não encontrado"));
     }
 
     @Override

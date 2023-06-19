@@ -51,7 +51,7 @@ public class AgendaController {
         try {
             String userHash = jwt.getClaim("c_hash");
             return createAgendaUseCase.execute(request, userHash)
-                    .map(response -> Response.status(Status.CREATED).entity(response).build())
+                    .map(response -> Response.status(Status.OK).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
                         String message = e.getMessage();
@@ -75,7 +75,7 @@ public class AgendaController {
         try {
             String userHash = jwt.getClaim("c_hash");
             return updateAgendaUseCase.execute(request, userHash)
-                    .map(response -> Response.status(Status.CREATED).entity(response).build())
+                    .map(response -> Response.status(Status.OK).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
                         String message = e.getMessage();

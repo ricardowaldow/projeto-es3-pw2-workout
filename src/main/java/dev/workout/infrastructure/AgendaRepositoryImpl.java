@@ -16,7 +16,8 @@ public class AgendaRepositoryImpl implements AgendaRepository, PanacheRepository
 
     @Override
     public Uni<AgendaEntity> findByHash(String hash) {
-        return find("hash", hash).firstResult();
+        return find("hash", hash).firstResult()
+        .onItem().ifNull().failWith(new IllegalArgumentException("Agenda não encontrada"));
     }
 
     @Override

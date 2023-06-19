@@ -57,7 +57,7 @@ public class WorkoutController {
     public Uni<Response> getWorkout(@PathParam("hash") final String hash) {
         try {
             return getWorkoutUseCase.execute(hash)
-                    .map(response -> Response.status(Status.ACCEPTED).entity(response).build())
+                    .map(response -> Response.status(Status.OK).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
                         String message = e.getMessage();
@@ -80,7 +80,7 @@ public class WorkoutController {
         try {
             String userHash = jwt.getClaim("c_hash");
             return listUserWorkoutsUseCase.execute(userHash)
-                    .map(response -> Response.status(Status.ACCEPTED).entity(response).build())
+                    .map(response -> Response.status(Status.OK).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
                         String message = e.getMessage();
@@ -103,7 +103,7 @@ public class WorkoutController {
         try {
             String userHash = jwt.getClaim("c_hash");
             return createWorkoutUseCase.execute(request, userHash)
-                    .map(response -> Response.status(Status.CREATED).entity(response).build())
+                    .map(response -> Response.status(Status.OK).entity(response).build())
                     .log()
                     .onFailure().transform(e -> {
                         String message = e.getMessage();

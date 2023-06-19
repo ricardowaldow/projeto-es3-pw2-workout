@@ -18,7 +18,8 @@ public class WorkoutRepositoryImpl implements WorkoutRepository, PanacheReposito
 
     @Override
     public Uni<WorkoutEntity> findByHash(String hash) {
-        return find("hash", hash).firstResult();
+        return find("hash", hash).firstResult()
+        .onItem().ifNull().failWith(new IllegalArgumentException("Workout não encontrado"));
     }
 
     @Override
@@ -30,5 +31,5 @@ public class WorkoutRepositoryImpl implements WorkoutRepository, PanacheReposito
     public Uni<Long> deleteWorkout(WorkoutEntity workout) {
         return delete("hash", workout.getHash());
     }
-    
+
 }
